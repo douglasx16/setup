@@ -153,7 +153,18 @@ yum -y install libxml2-devel libxslt-devel graphviz
 # ruby
 #
 
-yum -y install rubygems ruby-devel
+yum install gcc-c++ patch readline readline-devel zlib zlib-devel -y
+yum install libyaml-devel libffi-devel openssl-devel make -y
+yum install bzip2 autoconf automake libtool bison iconv-devel sqlite-devel -y
+curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+curl -L get.rvm.io | bash -s stable
+source /etc/profile.d/rvm.sh
+rvm reload
+rvm requirements run
+rvm install 2.2.4
+rvm use 2.2.4 --default
+yum -y install rubygems
+
 gem update --system 2.6.1
 gem install json -v 1.8.3
 gem install bundler
@@ -239,4 +250,3 @@ yum -y install logstash
 chkconfig --add logstash
 chkconfig logstash on
 service logstash start
-
